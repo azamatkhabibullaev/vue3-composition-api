@@ -11,7 +11,7 @@ const items = ref([
 ])
 
 const newItem = ref('')
-const newItemPriority = ref('low')
+const newItemHighPriority = ref(false)
 </script>
 
 <template>
@@ -23,14 +23,11 @@ const newItemPriority = ref('low')
   </div>
 
   <div>
-    Priority:
-    <select v-model="newItemPriority">
-      <option value="low">Low</option>
-      <option value="high">High</option>
-    </select>
+    <input type="checkbox" id="priority" v-model="newItemHighPriority">
+    <label for="priority">High Priority</label>
   </div>
-  
-  {{ newItemPriority }}
+
+  {{ newItemHighPriority }}
 
   <ul>
     <li v-for="({ id, label }, index) in items" :key="id">
