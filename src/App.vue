@@ -22,15 +22,14 @@ const newItemPriority = ref('low')
     <input v-model="newItem" type="text" placeholder="Add an item">
   </div>
 
-  Priority:
-  <div class="input-group">
-    <input type="radio" name="priority" id="low" v-model="newItemPriority" value="low">
-    <label for="low">Low</label>
+  <div>
+    Priority:
+    <select v-model="newItemPriority">
+      <option value="low">Low</option>
+      <option value="high">High</option>
+    </select>
   </div>
-  <div class="input-group">
-    <input type="radio" name="priority" id="high" v-model="newItemPriority" value="high">
-    <label for="high">High</label>
-  </div>
+  
   {{ newItemPriority }}
 
   <ul>
