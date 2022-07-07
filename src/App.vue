@@ -13,34 +13,28 @@ const items = ref([
 const newItem = ref('')
 const newItemHighPriority = ref(false)
 const iceCreamFlavors = ref([])
+
+const saveItem = () => {
+  items.value.push({
+    id: items.value.length + 1,
+    label: newItem.value
+  })
+  newItem.value = ''
+}
 </script>
 
 <template>
   <h1 class="heading">
     {{ heading }}
   </h1>
-  <form 
-    class="add-item-form"
-    @submit.prevent="items.push({
-      id: items.length + 1,
-      label: newItem
-    })"
-  >
+  <form class="add-item-form" @submit.prevent="saveItem">
     <div class="input-group">
       <div>
-        <input 
-          v-model="newItem"
-          type="text" 
-          placeholder="Add an item"
-      >
+        <input v-model="newItem" type="text" placeholder="Add an item">
       </div>
 
       <div>
-        <input 
-          type="checkbox" 
-          id="priority" 
-          v-model="newItemHighPriority"
-        >
+        <input type="checkbox" id="priority" v-model="newItemHighPriority">
         <label for="priority">High Priority</label>
       </div>
     </div>
@@ -50,39 +44,21 @@ const iceCreamFlavors = ref([])
 
   <div class="input-group">
     <div>
-      <input 
-        type="checkbox" 
-        id="vanilla" 
-        v-model="iceCreamFlavors" 
-        value="vanilla"
-      >
+      <input type="checkbox" id="vanilla" v-model="iceCreamFlavors" value="vanilla">
       <label for="vanilla">Vanilla</label>
     </div>
     <div>
-      <input 
-        type="checkbox" 
-        id="chocolate" 
-        v-model="iceCreamFlavors" 
-        value="chocolate"
-      >
+      <input type="checkbox" id="chocolate" v-model="iceCreamFlavors" value="chocolate">
       <label for="chocolate">Chocolate</label>
     </div>
     <div>
-      <input 
-        type="checkbox" 
-        id="strawberry" 
-        v-model="iceCreamFlavors" 
-        value="strawberry"
-      >
+      <input type="checkbox" id="strawberry" v-model="iceCreamFlavors" value="strawberry">
       <label for="strawberry">Strawberry</label>
     </div>
   </div>
 
   <ul>
-    <li 
-      v-for="({ id, label }, index) in items" 
-      :key="id"
-    >
+    <li v-for="({ id, label }, index) in items" :key="id">
       {{ index + 1 }} - {{ label }}
     </li>
   </ul>
