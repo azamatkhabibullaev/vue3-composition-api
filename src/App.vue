@@ -23,7 +23,7 @@ const saveItem = () => {
 
 const editing = ref(false)
 
-const doEdite = (e) => {
+const doEdit = (e) => {
   editing.value = e
   newItem.value = ''
 }
@@ -32,8 +32,8 @@ const doEdite = (e) => {
 <template>
   <div class="header">
     <h1>{{ header }}</h1>
-    <button class="btn" v-if="editing" @click="doEdite(false)">Cancel</button>
-    <button class="btn btn-primary" v-else @click="doEdite(true)">Add Item</button>
+    <button class="btn" v-if="editing" @click="doEdit(false)">Cancel</button>
+    <button class="btn btn-primary" v-else @click="doEdit(true)">Add Item</button>
   </div>
 
   <form class="add-item-form" v-if="editing" @submit.prevent="saveItem">
