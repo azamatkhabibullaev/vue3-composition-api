@@ -2,11 +2,6 @@ html {
   box-sizing: border-box;
 }
 
-html,
-body {
-  height: 100%;
-}
-
 *, *::before, *::after {
   box-sizing: inherit;
   margin: 0;
@@ -171,25 +166,4 @@ input[type="checkbox"]{
   display: inline !important;
   box-shadow: none;
   width: auto;
-}
-
-label {
-  user-select: none;
-}
-
-.input-group {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 1rem;
-  margin-top: 0.5rem;
-}
-
-.input-group > div {
-  display: flex;
-  align-items: center;
-}
-
-.heading {
-  margin-bottom: 1rem;
 }

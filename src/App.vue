@@ -1,18 +1,17 @@
 <script setup>
 import { ref } from 'vue'
 
-const heading = ref('Shopping List App')
+const header = ref('Shopping List App')
 
 const items = ref([
-  { id: 1, label: '10 party hats' },
-  { id: 2, label: '20 cups' },
-  { id: 3, label: '10 gaming chairs' },
-  { id: 3, label: '1 Awesome Vue Course' }
+  // { id: 1, label: '10 party hats' },
+  // { id: 2, label: '20 cups' },
+  // { id: 3, label: '10 gaming chairs' },
+  // { id: 3, label: '1 Awesome Vue Course' }
 ])
 
 const newItem = ref('')
 const newItemHighPriority = ref(false)
-const iceCreamFlavors = ref([])
 
 const saveItem = () => {
   items.value.push({
@@ -21,16 +20,26 @@ const saveItem = () => {
   })
   newItem.value = ''
 }
+
+const editing = ref(false)
+
+const doEdite = (e) => {
+  editing.value = e
+  newItem.value = ''
+}
 </script>
 
 <template>
-  <h1 class="heading">
-    {{ heading }}
-  </h1>
-  <form class="add-item-form" @submit.prevent="saveItem">
+  <div class="header">
+    <h1>{{ header }}</h1>
+    <button class="btn" v-if="editing" @click="doEdite(false)">Cancel</button>
+    <button class="btn btn-primary" v-else @click="doEdite(true)">Add Item</button>
+  </div>
+
+  <form class="add-item-form" v-if="editing" @submit.prevent="saveItem">
     <div class="input-group">
       <div>
-        <input v-model="newItem" type="text" placeholder="Add an item">
+        <input v-model.trim="newItem" type="text" placeholder="Add an item">
       </div>
 
       <div>
@@ -42,26 +51,15 @@ const saveItem = () => {
     <button class="btn btn-primary" type="submit">Save</button>
   </form>
 
-  <div class="input-group">
-    <div>
-      <input type="checkbox" id="vanilla" v-model="iceCreamFlavors" value="vanilla">
-      <label for="vanilla">Vanilla</label>
-    </div>
-    <div>
-      <input type="checkbox" id="chocolate" v-model="iceCreamFlavors" value="chocolate">
-      <label for="chocolate">Chocolate</label>
-    </div>
-    <div>
-      <input type="checkbox" id="strawberry" v-model="iceCreamFlavors" value="strawberry">
-      <label for="strawberry">Strawberry</label>
-    </div>
-  </div>
-
   <ul>
-    <li v-for="({ id, label }, index) in items" :key="id">
+    <li v-for="({ id, label }, index) in items" :key="id" class="item">
       {{ index + 1 }} - {{ label }}
     </li>
   </ul>
+
+  <p v-if="!items.length">
+    Nothing to see here
+  </p>
 </template>
 
 <style>
